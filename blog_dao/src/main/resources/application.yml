@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql:///java_blog_server?useUnicode=true&characterEncoding=utf8&useSSL=false&&serverTimezone=UTC
+    username: root
+    password: 0438424142c
+
+mybatis:
+  type-aliases-package: com.cg.blog.pojo
+
+logging:
+    level:
+      com.cg.blog: debug
