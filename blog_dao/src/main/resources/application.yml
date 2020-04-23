@@ -9,6 +9,7 @@ mybatis:
   type-aliases-package: com.cg.blog.pojo
   mapperLocations: classpath*:mybatis/**/*Mapper.xml
 
+
 logging:
     level:
       com.cg.blog: debug
