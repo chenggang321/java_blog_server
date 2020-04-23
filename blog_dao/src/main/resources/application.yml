@@ -8,6 +8,7 @@ spring:
 mybatis:
   type-aliases-package: com.cg.blog.pojo
   mapperLocations: classpath*:mybatis/**/*Mapper.xml
+  map-underscore-to-camel-case: true
 
 
 logging:
