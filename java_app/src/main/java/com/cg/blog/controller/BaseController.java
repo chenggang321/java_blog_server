@@ -11,35 +11,26 @@ public class BaseController<T> {
 
     @RequestMapping("list")
     public R list(T t){
-        try{
-            return R.isOk().data(baseService.list(t));
-        }catch (Exception e){
-            return R.isFail(e);
-        }
-
+        return R.success().data(baseService.list(t));
     }
 
     @RequestMapping("get")
     public R get(T t){
-        try{
-            return R.isOk().data(baseService.get(t));
-        }catch (Exception e){
-            return R.isFail(e);
-        }
+        return R.success().data(baseService.get(t));
     }
 
     @RequestMapping("update")
     public R update(T t){
-        return R.isOk().data(baseService.update(t));
+        return R.success().data(baseService.update(t));
     }
 
     @RequestMapping("save")
     public R save(T t){
-        return R.isOk().data(baseService.save(t));
+        return R.success().data(baseService.save(t));
     }
 
     @RequestMapping("delete")
     public R delete(T t){
-        return R.isOk().data(baseService.delete(t));
+        return R.success().data(baseService.delete(t));
     }
 }
