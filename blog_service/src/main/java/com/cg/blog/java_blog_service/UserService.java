@@ -1,5 +1,7 @@
 package com.cg.blog.java_blog_service;
 
-public interface UserService {
+import com.cg.blog.pojo.User;
+
+public interface UserService extends BaseService<User>{
 
 }

@@ -12,5 +12,5 @@ public class Category {
     @Id
     @KeySql(useGeneratedKeys = true)
     private Long id;
-    private String title;
+    private String name;
 }
