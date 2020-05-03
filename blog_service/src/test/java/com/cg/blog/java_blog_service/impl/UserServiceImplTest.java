@@ -45,6 +45,8 @@ public class UserServiceImplTest {
     public void updateUser() {
         User user = new User();
         user.setId(1l);
+        user.setUsername("test");
+        user.setPassword("123456");
         user.setIsAdmin(true);
         userService.update(user);
     }
@@ -54,5 +56,10 @@ public class UserServiceImplTest {
         User user = new User();
         user.setId(9l);
         userService.delete(user);
+    }
+
+    @Test
+    public void login() {
+        userService.login("test","123456");
     }
 }
