@@ -36,6 +36,10 @@ public class R<T> implements Serializable{
         return error().message(code,message);
     }
 
+    public static R error(String message) {
+        return error().message(message);
+    }
+
     public R message(Throwable e) {
         this.setMessage(e.toString());
         return this;
@@ -47,6 +51,11 @@ public class R<T> implements Serializable{
 
     public R message(Number code,String message){
         this.setCode(code);
+        this.setMessage(message);
+        return this;
+    }
+
+    public R message(String message){
         this.setMessage(message);
         return this;
     }

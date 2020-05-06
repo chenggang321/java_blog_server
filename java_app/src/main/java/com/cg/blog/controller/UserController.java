@@ -6,9 +6,12 @@ import com.cg.blog.java_blog_service.UserService;
 import com.cg.blog.pojo.User;
 import com.cg.blog.vo.LoginVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Validated
 @RestController
 @RequestMapping("/user/*")
 public class UserController extends BaseController<User> {
@@ -17,7 +20,7 @@ public class UserController extends BaseController<User> {
     private UserService userService;
 
     @RequestMapping("login")
-    public R login(LoginVo loginVo){
+    public R login(@Validated LoginVo loginVo){
 
         LoginDto loginDto = userService.login(loginVo.getUsername(),loginVo.getPassword());
 
