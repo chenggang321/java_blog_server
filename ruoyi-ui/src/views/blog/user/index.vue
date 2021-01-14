@@ -19,15 +19,6 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="密码" prop="isAdmin">
-        <el-input
-          v-model="queryParams.isAdmin"
-          placeholder="请输入密码"
-          clearable
-          size="small"
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
@@ -105,7 +96,7 @@
         </template>
       </el-table-column>
     </el-table>
-    
+
     <pagination
       v-show="total>0"
       :total="total"
@@ -123,8 +114,8 @@
         <el-form-item label="密码" prop="password">
           <el-input v-model="form.password" placeholder="请输入密码" />
         </el-form-item>
-        <el-form-item label="密码" prop="isAdmin">
-          <el-input v-model="form.isAdmin" placeholder="请输入密码" />
+        <el-form-item label="是否为管理员" prop="isAdmin">
+          <el-input v-model="form.isAdmin" placeholder="请输入是否为管理员" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
