@@ -59,6 +59,11 @@
             <artifactId>ruoyi-system</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>eu.bitwalker</groupId>
+            <artifactId>UserAgentUtils</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>
