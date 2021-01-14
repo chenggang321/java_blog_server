@@ -1,5 +1,15 @@
+######################################################################
+# Build Tools
+
+.gradle
+/build/
+!gradle/wrapper/gradle-wrapper.jar
+
 target/
 !.mvn/wrapper/maven-wrapper.jar
+
+######################################################################
+# IDE
 
 ### STS ###
 .apt_generated
@@ -8,7 +18,6 @@ target/
 .project
 .settings
 .springBeans
-.sts4-cache
 
 ### IntelliJ IDEA ###
 .idea
@@ -18,8 +27,18 @@ target/
 
 ### NetBeans ###
 nbproject/private/
-build/
+build/*
 nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+
+######################################################################
+# Others
+*.log
+*.xml.versionsBackup
+*.swp
+
+!*/build/*.java
+!*/build/*.html
+!*/build/*.xml
