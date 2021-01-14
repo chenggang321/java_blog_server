@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.blog.mapper.BlogUserMapper">
+    
+    <resultMap type="BlogUser" id="BlogUserResult">
+        <result property="id"    column="id"    />
+        <result property="username"    column="username"    />
+        <result property="password"    column="password"    />
+        <result property="isAdmin"    column="is_admin"    />
+    </resultMap>
+
+    <sql id="selectBlogUserVo">
+        select id, username, password, is_admin from blog_user
+    </sql>
+
+    <select id="selectBlogUserList" parameterType="BlogUser" resultMap="BlogUserResult">
+        <include refid="selectBlogUserVo"/>
+        <where>  
+            <if test="username != null  and username != ''"> and username like concat('%', #{username}, '%')</if>
+            <if test="password != null  and password != ''"> and password = #{password}</if>
+            <if test="isAdmin != null "> and is_admin = #{isAdmin}</if>
+        </where>
+    </select>
+    
+    <select id="selectBlogUserById" parameterType="Long" resultMap="BlogUserResult">
+        <include refid="selectBlogUserVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertBlogUser" parameterType="BlogUser" useGeneratedKeys="true" keyProperty="id">
+        insert into blog_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="username != null">username,</if>
+            <if test="password != null">password,</if>
+            <if test="isAdmin != null">is_admin,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="username != null">#{username},</if>
+            <if test="password != null">#{password},</if>
+            <if test="isAdmin != null">#{isAdmin},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBlogUser" parameterType="BlogUser">
+        update blog_user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="username != null">username = #{username},</if>
+            <if test="password != null">password = #{password},</if>
+            <if test="isAdmin != null">is_admin = #{isAdmin},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBlogUserById" parameterType="Long">
+        delete from blog_user where id = #{id}
+    </delete>
+
+    <delete id="deleteBlogUserByIds" parameterType="String">
+        delete from blog_user where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
