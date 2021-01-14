@@ -24,12 +24,12 @@ import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
- * 【请填写功能名称】Controller
+ * 分类 Controller
  *
  * @author chenggang
  * @date 2021-01-14
  */
-@Api("分类管理")
+@Api("分类")
 @RestController
 @RequestMapping("/blog/category")
 public class BlogCategoryController extends BaseController
@@ -38,9 +38,9 @@ public class BlogCategoryController extends BaseController
     private IBlogCategoryService blogCategoryService;
 
     /**
-     * 查询【请填写功能名称】列表
+     * 查询分类列表
      */
-    @ApiOperation("分类管理列表")
+    @ApiOperation("查询分类列表")
     @PreAuthorize("@ss.hasPermi('blog:category:list')")
     @GetMapping("/list")
     public TableDataInfo list(BlogCategory blogCategory)
@@ -51,10 +51,11 @@ public class BlogCategoryController extends BaseController
     }
 
     /**
-     * 导出【请填写功能名称】列表
+     * 导出分类列表列表
      */
+    @ApiOperation("导出分类列表列表")
     @PreAuthorize("@ss.hasPermi('blog:category:export')")
-    @Log(title = "【请填写功能名称】", businessType = BusinessType.EXPORT)
+    @Log(title = "导出分类列表列表", businessType = BusinessType.EXPORT)
     @GetMapping("/export")
     public AjaxResult export(BlogCategory blogCategory)
     {
@@ -64,8 +65,9 @@ public class BlogCategoryController extends BaseController
     }
 
     /**
-     * 获取【请填写功能名称】详细信息
+     * 获取分类详细信息
      */
+    @ApiOperation("获取分类详细信息")
     @PreAuthorize("@ss.hasPermi('blog:category:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
@@ -74,10 +76,11 @@ public class BlogCategoryController extends BaseController
     }
 
     /**
-     * 新增【请填写功能名称】
+     * 新增分类
      */
+    @ApiOperation("新增分类")
     @PreAuthorize("@ss.hasPermi('blog:category:add')")
-    @Log(title = "【请填写功能名称】", businessType = BusinessType.INSERT)
+    @Log(title = "新增分类", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody BlogCategory blogCategory)
     {
@@ -85,10 +88,11 @@ public class BlogCategoryController extends BaseController
     }
 
     /**
-     * 修改【请填写功能名称】
+     * 修改分类
      */
+    @ApiOperation("修改分类")
     @PreAuthorize("@ss.hasPermi('blog:category:edit')")
-    @Log(title = "【请填写功能名称】", businessType = BusinessType.UPDATE)
+    @Log(title = "修改分类", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody BlogCategory blogCategory)
     {
@@ -96,10 +100,11 @@ public class BlogCategoryController extends BaseController
     }
 
     /**
-     * 删除【请填写功能名称】
+     * 删除分类
      */
+    @ApiOperation("删除分类")
     @PreAuthorize("@ss.hasPermi('blog:category:remove')")
-    @Log(title = "【请填写功能名称】", businessType = BusinessType.DELETE)
+    @Log(title = "删除分类", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)
     {

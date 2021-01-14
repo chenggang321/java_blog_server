@@ -1,6 +1,9 @@
 package com.ruoyi.blog.controller;
 
 import java.util.List;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,11 +24,12 @@ import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
- * 【请填写功能名称】Controller
+ * 文章 Controller
  * 
  * @author chenggang
  * @date 2021-01-14
  */
+@Api("文章")
 @RestController
 @RequestMapping("/blog/content")
 public class BlogContentController extends BaseController
@@ -34,8 +38,9 @@ public class BlogContentController extends BaseController
     private IBlogContentService blogContentService;
 
     /**
-     * 查询【请填写功能名称】列表
+     * 查询文章列表
      */
+    @ApiOperation("查询文章列表")
     @PreAuthorize("@ss.hasPermi('blog:content:list')")
     @GetMapping("/list")
     public TableDataInfo list(BlogContent blogContent)
@@ -46,10 +51,11 @@ public class BlogContentController extends BaseController
     }
 
     /**
-     * 导出【请填写功能名称】列表
+     * 导出文章列表
      */
+    @ApiOperation("导出文章列表")
     @PreAuthorize("@ss.hasPermi('blog:content:export')")
-    @Log(title = "【请填写功能名称】", businessType = BusinessType.EXPORT)
+    @Log(title = "导出文章列表", businessType = BusinessType.EXPORT)
     @GetMapping("/export")
     public AjaxResult export(BlogContent blogContent)
     {
@@ -59,8 +65,9 @@ public class BlogContentController extends BaseController
     }
 
     /**
-     * 获取【请填写功能名称】详细信息
+     * 获取文章详细信息
      */
+    @ApiOperation("获取文章详细信息")
     @PreAuthorize("@ss.hasPermi('blog:content:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
@@ -69,10 +76,11 @@ public class BlogContentController extends BaseController
     }
 
     /**
-     * 新增【请填写功能名称】
+     * 新增文章
      */
+    @ApiOperation("新增文章")
     @PreAuthorize("@ss.hasPermi('blog:content:add')")
-    @Log(title = "【请填写功能名称】", businessType = BusinessType.INSERT)
+    @Log(title = "新增文章", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody BlogContent blogContent)
     {
@@ -80,10 +88,11 @@ public class BlogContentController extends BaseController
     }
 
     /**
-     * 修改【请填写功能名称】
+     * 修改文章
      */
+    @ApiOperation("修改文章")
     @PreAuthorize("@ss.hasPermi('blog:content:edit')")
-    @Log(title = "【请填写功能名称】", businessType = BusinessType.UPDATE)
+    @Log(title = "修改文章", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody BlogContent blogContent)
     {
@@ -91,10 +100,11 @@ public class BlogContentController extends BaseController
     }
 
     /**
-     * 删除【请填写功能名称】
+     * 删除文章
      */
+    @ApiOperation("删除文章")
     @PreAuthorize("@ss.hasPermi('blog:content:remove')")
-    @Log(title = "【请填写功能名称】", businessType = BusinessType.DELETE)
+    @Log(title = "删除文章", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)
     {
