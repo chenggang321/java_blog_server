@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.blog.mapper.BlogContentMapper">
+    
+    <resultMap type="BlogContent" id="BlogContentResult">
+        <result property="id"    column="id"    />
+        <result property="title"    column="title"    />
+        <result property="addTime"    column="add_time"    />
+        <result property="views"    column="views"    />
+        <result property="description"    column="description"    />
+        <result property="content"    column="content"    />
+        <result property="commentId"    column="comment_id"    />
+        <result property="categoryId"    column="category_id"    />
+        <result property="userId"    column="user_id"    />
+    </resultMap>
+
+    <sql id="selectBlogContentVo">
+        select id, title, add_time, views, description, content, comment_id, category_id, user_id from blog_content
+    </sql>
+
+    <select id="selectBlogContentList" parameterType="BlogContent" resultMap="BlogContentResult">
+        <include refid="selectBlogContentVo"/>
+        <where>  
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="addTime != null "> and add_time = #{addTime}</if>
+            <if test="views != null "> and views = #{views}</if>
+            <if test="description != null  and description != ''"> and description = #{description}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="commentId != null "> and comment_id = #{commentId}</if>
+            <if test="categoryId != null "> and category_id = #{categoryId}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+        </where>
+    </select>
+    
+    <select id="selectBlogContentById" parameterType="Long" resultMap="BlogContentResult">
+        <include refid="selectBlogContentVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertBlogContent" parameterType="BlogContent" useGeneratedKeys="true" keyProperty="id">
+        insert into blog_content
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="title != null">title,</if>
+            <if test="addTime != null">add_time,</if>
+            <if test="views != null">views,</if>
+            <if test="description != null">description,</if>
+            <if test="content != null">content,</if>
+            <if test="commentId != null">comment_id,</if>
+            <if test="categoryId != null">category_id,</if>
+            <if test="userId != null">user_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="title != null">#{title},</if>
+            <if test="addTime != null">#{addTime},</if>
+            <if test="views != null">#{views},</if>
+            <if test="description != null">#{description},</if>
+            <if test="content != null">#{content},</if>
+            <if test="commentId != null">#{commentId},</if>
+            <if test="categoryId != null">#{categoryId},</if>
+            <if test="userId != null">#{userId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBlogContent" parameterType="BlogContent">
+        update blog_content
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null">title = #{title},</if>
+            <if test="addTime != null">add_time = #{addTime},</if>
+            <if test="views != null">views = #{views},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="commentId != null">comment_id = #{commentId},</if>
+            <if test="categoryId != null">category_id = #{categoryId},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBlogContentById" parameterType="Long">
+        delete from blog_content where id = #{id}
+    </delete>
+
+    <delete id="deleteBlogContentByIds" parameterType="String">
+        delete from blog_content where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

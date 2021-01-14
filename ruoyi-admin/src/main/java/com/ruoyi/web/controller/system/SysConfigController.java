@@ -1,6 +1,9 @@
 package com.ruoyi.web.controller.system;
 
 import java.util.List;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -26,9 +29,10 @@ import com.ruoyi.system.service.ISysConfigService;
 
 /**
  * 参数配置 信息操作处理
- * 
+ *
  * @author ruoyi
  */
+@Api
 @RestController
 @RequestMapping("/system/config")
 public class SysConfigController extends BaseController
@@ -39,6 +43,7 @@ public class SysConfigController extends BaseController
     /**
      * 获取参数配置列表
      */
+    @ApiOperation("获取参数配置列表")
     @PreAuthorize("@ss.hasPermi('system:config:list')")
     @GetMapping("/list")
     public TableDataInfo list(SysConfig config)
