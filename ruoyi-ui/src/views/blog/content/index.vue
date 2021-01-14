@@ -36,33 +36,16 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="评论关联表id" prop="commentId">
-        <el-input
-          v-model="queryParams.commentId"
-          placeholder="请输入评论关联表id"
-          clearable
-          size="small"
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="分类关联表id" prop="categoryId">
+      <el-form-item label="分类" prop="categoryId">
         <el-input
           v-model="queryParams.categoryId"
-          placeholder="请输入分类关联表id"
+          placeholder="请输入分类"
           clearable
           size="small"
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="用户关联表id" prop="userId">
-        <el-input
-          v-model="queryParams.userId"
-          placeholder="请输入用户关联表id"
-          clearable
-          size="small"
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
+
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
@@ -117,7 +100,6 @@
 
     <el-table v-loading="loading" :data="contentList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="用户关联表id" align="center" prop="id" />
       <el-table-column label="文章标题" align="center" prop="title" />
       <el-table-column label="添加时间" align="center" prop="addTime" width="180">
         <template slot-scope="scope">
@@ -127,9 +109,7 @@
       <el-table-column label="阅读量" align="center" prop="views" />
       <el-table-column label="文章简介" align="center" prop="description" />
       <el-table-column label="文章内容" align="center" prop="content" />
-      <el-table-column label="评论关联表id" align="center" prop="commentId" />
-      <el-table-column label="分类关联表id" align="center" prop="categoryId" />
-      <el-table-column label="用户关联表id" align="center" prop="userId" />
+      <el-table-column label="分类" align="center" prop="categoryId" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -149,7 +129,7 @@
         </template>
       </el-table-column>
     </el-table>
-    
+
     <pagination
       v-show="total>0"
       :total="total"
@@ -158,8 +138,8 @@
       @pagination="getList"
     />
 
-    <!-- 添加或修改【请填写功能名称】对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
+    <!-- 添加或修改文章对话框 -->
+    <el-dialog :title="title" :visible.sync="open" width="80%" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="文章标题" prop="title">
           <el-input v-model="form.title" placeholder="请输入文章标题" />
@@ -222,7 +202,7 @@ export default {
       showSearch: true,
       // 总条数
       total: 0,
-      // 【请填写功能名称】表格数据
+      // 文章表格数据
       contentList: [],
       // 弹出层标题
       title: "",
@@ -252,7 +232,7 @@ export default {
     this.getList();
   },
   methods: {
-    /** 查询【请填写功能名称】列表 */
+    /** 查询文章列表 */
     getList() {
       this.loading = true;
       listContent(this.queryParams).then(response => {
@@ -301,7 +281,7 @@ export default {
     handleAdd() {
       this.reset();
       this.open = true;
-      this.title = "添加【请填写功能名称】";
+      this.title = "添加文章";
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
@@ -310,7 +290,7 @@ export default {
       getContent(id).then(response => {
         this.form = response.data;
         this.open = true;
-        this.title = "修改【请填写功能名称】";
+        this.title = "修改文章";
       });
     },
     /** 提交按钮 */
@@ -336,7 +316,7 @@ export default {
     /** 删除按钮操作 */
     handleDelete(row) {
       const ids = row.id || this.ids;
-      this.$confirm('是否确认删除【请填写功能名称】编号为"' + ids + '"的数据项?', "警告", {
+      this.$confirm('是否确认删除文章编号为"' + ids + '"的数据项?', "警告", {
           confirmButtonText: "确定",
           cancelButtonText: "取消",
           type: "warning"
@@ -350,7 +330,7 @@ export default {
     /** 导出按钮操作 */
     handleExport() {
       const queryParams = this.queryParams;
-      this.$confirm('是否确认导出所有【请填写功能名称】数据项?', "警告", {
+      this.$confirm('是否确认导出所有文章数据项?', "警告", {
           confirmButtonText: "确定",
           cancelButtonText: "取消",
           type: "warning"
