@@ -1,6 +1,6 @@
 FROM openjdk:8
 
-ENV TARGET_JAR /usr/local/java-blog-server/java-blog-server.jar
+ENV TARGET_JAR /usr/local/ruoyi-admin/ruoyi-admin.jar
 COPY /ruoyi-admin/target/*.jar $TARGET_JAR
 
 ENV PROFILE_ACTIVE prod
