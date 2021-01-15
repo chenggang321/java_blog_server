@@ -14,7 +14,7 @@ public class RuoYiApplication
 {
     public static void main(String[] args)
     {
-        System.setProperty("spring.devtools.restart.enabled", "true");
+        // System.setProperty("spring.devtools.restart.enabled", "true");
         SpringApplication.run(RuoYiApplication.class, args);
         System.out.println("(♥◠‿◠)ﾉﾞ  博客启动成功   ლ(´ڡ`ლ)ﾞ  \n" +
                 " .-------.       ____     __        \n" +
