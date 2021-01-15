@@ -3,7 +3,7 @@ FROM openjdk:8
 ENV TARGET_JAR /usr/local/ruoyi-admin/ruoyi-admin.jar
 COPY /ruoyi-admin/target/*.jar $TARGET_JAR
 
-ENV PROFILE_ACTIVE prod
+ENV PROFILE_ACTIVE ""
 ENV PORT 3000
 ENV JAVA_OPTS ""
 
