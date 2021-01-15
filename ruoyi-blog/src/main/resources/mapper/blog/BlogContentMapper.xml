@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.blog.mapper.BlogContentMapper">
-    
+
     <resultMap type="BlogContent" id="BlogContentResult">
         <result property="id"    column="id"    />
         <result property="title"    column="title"    />
@@ -14,15 +14,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="commentId"    column="comment_id"    />
         <result property="categoryId"    column="category_id"    />
         <result property="userId"    column="user_id"    />
+        <association property="category"    column="category_id" javaType="BlogCategory" resultMap="BlogCategoryResult" />
     </resultMap>
 
+    <resultMap type="BlogCategory" id="BlogCategoryResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+    </resultMap>
+
+
     <sql id="selectBlogContentVo">
-        select id, title, add_time, views, description, content, comment_id, category_id, user_id from blog_content
+        select id, title, add_time, views, description, content, comment_id, category_id, user_id
     </sql>
 
     <select id="selectBlogContentList" parameterType="BlogContent" resultMap="BlogContentResult">
-        <include refid="selectBlogContentVo"/>
-        <where>  
+        SELECT c.id,title,add_time,views,description,content,comment_id,category_id,user_id,ca.name
+        FROM blog_content c
+        LEFT JOIN blog_category ca ON c.category_id=ca.id
+        <where>
             <if test="title != null  and title != ''"> and title = #{title}</if>
             <if test="addTime != null "> and add_time = #{addTime}</if>
             <if test="views != null "> and views = #{views}</if>
@@ -33,12 +42,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="userId != null "> and user_id = #{userId}</if>
         </where>
     </select>
-    
+
     <select id="selectBlogContentById" parameterType="Long" resultMap="BlogContentResult">
         <include refid="selectBlogContentVo"/>
         where id = #{id}
     </select>
-        
+
     <insert id="insertBlogContent" parameterType="BlogContent" useGeneratedKeys="true" keyProperty="id">
         insert into blog_content
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -83,7 +92,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteBlogContentByIds" parameterType="String">
-        delete from blog_content where id in 
+        delete from blog_content where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

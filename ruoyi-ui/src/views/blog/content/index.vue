@@ -18,34 +18,23 @@
           placeholder="选择添加时间">
         </el-date-picker>
       </el-form-item>
-      <el-form-item label="阅读量" prop="views">
-        <el-input
-          v-model="queryParams.views"
-          placeholder="请输入阅读量"
-          clearable
-          size="small"
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="文章简介" prop="description">
-        <el-input
-          v-model="queryParams.description"
-          placeholder="请输入文章简介"
-          clearable
-          size="small"
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="分类" prop="categoryId">
-        <el-input
+
+      <el-form-item label="分类" prop="status">
+        <el-select
           v-model="queryParams.categoryId"
           placeholder="请输入分类"
           clearable
           size="small"
-          @keyup.enter.native="handleQuery"
-        />
+          style="width: 240px"
+        >
+          <el-option
+            v-for="ca in categoryList"
+            :key="ca.id"
+            :label="ca.name"
+            :value="ca.id"
+          />
+        </el-select>
       </el-form-item>
-
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
@@ -101,15 +90,14 @@
     <el-table v-loading="loading" :data="contentList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="文章标题" align="center" prop="title" />
+      <el-table-column label="分类" align="center" prop="category.name" />
+      <el-table-column label="阅读量" align="center" prop="views" />
+      <el-table-column label="文章简介" align="center" prop="description" />
       <el-table-column label="添加时间" align="center" prop="addTime" width="180">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.addTime, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="阅读量" align="center" prop="views" />
-      <el-table-column label="文章简介" align="center" prop="description" />
-      <el-table-column label="文章内容" align="center" prop="content" />
-      <el-table-column label="分类" align="center" prop="categoryId" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -182,6 +170,7 @@
 <script>
 import { listContent, getContent, delContent, addContent, updateContent, exportContent } from "@/api/blog/content";
 import Editor from '@/components/Editor';
+import {listCategory} from "../../../api/blog/category";
 
 export default {
   name: "Content",
@@ -204,6 +193,7 @@ export default {
       total: 0,
       // 文章表格数据
       contentList: [],
+      categoryList: [],
       // 弹出层标题
       title: "",
       // 是否显示弹出层
@@ -230,6 +220,7 @@ export default {
   },
   created() {
     this.getList();
+    this.getCategoryList();
   },
   methods: {
     /** 查询文章列表 */
@@ -240,6 +231,12 @@ export default {
         this.total = response.total;
         this.loading = false;
       });
+    },
+    // 分类列表
+    getCategoryList(){
+      listCategory().then(res => {
+        this.categoryList = res.rows
+      })
     },
     // 取消按钮
     cancel() {

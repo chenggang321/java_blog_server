@@ -9,7 +9,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * 【请填写功能名称】对象 blog_content
- * 
+ *
  * @author chenggang
  * @date 2021-01-14
  */
@@ -49,88 +49,98 @@ public class BlogContent extends BaseEntity
     @Excel(name = "分类关联表id")
     private Long categoryId;
 
+    private BlogCategory category;
+
+    public BlogCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(BlogCategory category) {
+        this.category = category;
+    }
+
     /** 用户关联表id */
     @Excel(name = "用户关联表id")
     private Long userId;
 
-    public void setId(Long id) 
+    public void setId(Long id)
     {
         this.id = id;
     }
 
-    public Long getId() 
+    public Long getId()
     {
         return id;
     }
-    public void setTitle(String title) 
+    public void setTitle(String title)
     {
         this.title = title;
     }
 
-    public String getTitle() 
+    public String getTitle()
     {
         return title;
     }
-    public void setAddTime(Date addTime) 
+    public void setAddTime(Date addTime)
     {
         this.addTime = addTime;
     }
 
-    public Date getAddTime() 
+    public Date getAddTime()
     {
         return addTime;
     }
-    public void setViews(Long views) 
+    public void setViews(Long views)
     {
         this.views = views;
     }
 
-    public Long getViews() 
+    public Long getViews()
     {
         return views;
     }
-    public void setDescription(String description) 
+    public void setDescription(String description)
     {
         this.description = description;
     }
 
-    public String getDescription() 
+    public String getDescription()
     {
         return description;
     }
-    public void setContent(String content) 
+    public void setContent(String content)
     {
         this.content = content;
     }
 
-    public String getContent() 
+    public String getContent()
     {
         return content;
     }
-    public void setCommentId(Long commentId) 
+    public void setCommentId(Long commentId)
     {
         this.commentId = commentId;
     }
 
-    public Long getCommentId() 
+    public Long getCommentId()
     {
         return commentId;
     }
-    public void setCategoryId(Long categoryId) 
+    public void setCategoryId(Long categoryId)
     {
         this.categoryId = categoryId;
     }
 
-    public Long getCategoryId() 
+    public Long getCategoryId()
     {
         return categoryId;
     }
-    public void setUserId(Long userId) 
+    public void setUserId(Long userId)
     {
         this.userId = userId;
     }
 
-    public Long getUserId() 
+    public Long getUserId()
     {
         return userId;
     }
