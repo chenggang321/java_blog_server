@@ -35,7 +35,7 @@ export default {
   },
   data() {
     return {
-      title: '若依管理系统',
+      title: '管理系统',
       logo: logoImg
     }
   }
@@ -60,16 +60,19 @@ export default {
   background: #2b2f3a;
   text-align: center;
   overflow: hidden;
+  border: 1px solid rgba(0, 21, 41, 0.08);
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+
 
   & .sidebar-logo-link {
     height: 100%;
     width: 100%;
 
     & .sidebar-logo {
-      width: 32px;
-      height: 32px;
+      width: 24px;
+      height: 24px;
       vertical-align: middle;
-      margin-right: 12px;
+      margin-right: 6px;
     }
 
     & .sidebar-title {

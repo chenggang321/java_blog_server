@@ -1,6 +1,6 @@
 ## 平台简介
 
-若依是一套全部开源的快速开发平台，毫无保留给个人及企业免费使用。
+博客是一套全部开源的快速开发平台，毫无保留给个人及企业免费使用。
 
 * 前端采用Vue、Element UI。
 * 后端采用Spring Boot、Spring Security、Redis & Jwt。
