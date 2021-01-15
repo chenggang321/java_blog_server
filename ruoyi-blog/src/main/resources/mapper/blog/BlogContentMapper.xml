@@ -25,12 +25,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <sql id="selectBlogContentVo">
         select id, title, add_time, views, description, content, comment_id, category_id, user_id
+        from blog_content
     </sql>
 
     <select id="selectBlogContentList" parameterType="BlogContent" resultMap="BlogContentResult">
-        SELECT c.id,title,add_time,views,description,content,comment_id,category_id,user_id,ca.name
-        FROM blog_content c
-        LEFT JOIN blog_category ca ON c.category_id=ca.id
+        select c.id,title,add_time,views,description,content,comment_id,category_id,user_id,ca.name
+        from blog_content c
+        left join blog_category ca on c.category_id=ca.id
         <where>
             <if test="title != null  and title != ''"> and title = #{title}</if>
             <if test="addTime != null "> and add_time = #{addTime}</if>

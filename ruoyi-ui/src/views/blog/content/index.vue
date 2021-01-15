@@ -22,7 +22,7 @@
       <el-form-item label="分类" prop="status">
         <el-select
           v-model="queryParams.categoryId"
-          placeholder="请输入分类"
+          placeholder="请选择分类"
           clearable
           size="small"
           style="width: 240px"
@@ -149,15 +149,28 @@
         <el-form-item label="文章内容">
           <editor v-model="form.content" :min-height="192"/>
         </el-form-item>
-        <el-form-item label="评论关联表id" prop="commentId">
+        <!--<el-form-item label="评论关联表id" prop="commentId">
           <el-input v-model="form.commentId" placeholder="请输入评论关联表id" />
+        </el-form-item>-->
+        <el-form-item label="分类" prop="categoryId">
+          <el-select
+            v-model="form.categoryId"
+            placeholder="请选择分类"
+            clearable
+            size="small"
+            style="width: 240px"
+          >
+            <el-option
+              v-for="ca in categoryList"
+              :key="ca.id"
+              :label="ca.name"
+              :value="ca.id"
+            />
+          </el-select>
         </el-form-item>
-        <el-form-item label="分类关联表id" prop="categoryId">
-          <el-input v-model="form.categoryId" placeholder="请输入分类关联表id" />
-        </el-form-item>
-        <el-form-item label="用户关联表id" prop="userId">
+        <!--<el-form-item label="用户关联表id" prop="userId">
           <el-input v-model="form.userId" placeholder="请输入用户关联表id" />
-        </el-form-item>
+        </el-form-item>-->
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitForm">确 定</el-button>
