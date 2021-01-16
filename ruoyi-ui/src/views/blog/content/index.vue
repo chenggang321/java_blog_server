@@ -127,68 +127,27 @@
     />
 
     <!-- 添加或修改文章对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="80%" append-to-body>
-      <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="文章标题" prop="title">
-          <el-input v-model="form.title" placeholder="请输入文章标题" />
-        </el-form-item>
-        <el-form-item label="添加时间" prop="addTime">
-          <el-date-picker clearable size="small"
-            v-model="form.addTime"
-            type="date"
-            value-format="yyyy-MM-dd"
-            placeholder="选择添加时间">
-          </el-date-picker>
-        </el-form-item>
-        <el-form-item label="阅读量" prop="views">
-          <el-input v-model="form.views" placeholder="请输入阅读量" />
-        </el-form-item>
-        <el-form-item label="文章简介" prop="description">
-          <el-input v-model="form.description" placeholder="请输入文章简介" />
-        </el-form-item>
-        <el-form-item label="文章内容">
-          <editor v-model="form.content" :min-height="192"/>
-        </el-form-item>
-        <!--<el-form-item label="评论关联表id" prop="commentId">
-          <el-input v-model="form.commentId" placeholder="请输入评论关联表id" />
-        </el-form-item>-->
-        <el-form-item label="分类" prop="categoryId">
-          <el-select
-            v-model="form.categoryId"
-            placeholder="请选择分类"
-            clearable
-            size="small"
-            style="width: 240px"
-          >
-            <el-option
-              v-for="ca in categoryList"
-              :key="ca.id"
-              :label="ca.name"
-              :value="ca.id"
-            />
-          </el-select>
-        </el-form-item>
-        <!--<el-form-item label="用户关联表id" prop="userId">
-          <el-input v-model="form.userId" placeholder="请输入用户关联表id" />
-        </el-form-item>-->
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="submitForm">确 定</el-button>
-        <el-button @click="cancel">取 消</el-button>
-      </div>
-    </el-dialog>
+    <ContentDialog
+      :title="title"
+      v-model="open"
+      v-if="open"
+      :edit-from="form"
+      :categoryList="categoryList"
+      @submitForm="getList"
+      @cancel="reset"
+    />
   </div>
 </template>
 
 <script>
-import { listContent, getContent, delContent, addContent, updateContent, exportContent } from "@/api/blog/content";
-import Editor from '@/components/Editor';
-import {listCategory} from "../../../api/blog/category";
+import { listContent, getContent, delContent, exportContent } from "@/api/blog/content";
+import ContentDialog from './dialog'
+import { listCategory } from '@/api/blog/category'
 
 export default {
   name: "Content",
   components: {
-    Editor,
+    ContentDialog
   },
   data() {
     return {
@@ -206,7 +165,6 @@ export default {
       total: 0,
       // 文章表格数据
       contentList: [],
-      categoryList: [],
       // 弹出层标题
       title: "",
       // 是否显示弹出层
@@ -226,9 +184,7 @@ export default {
       },
       // 表单参数
       form: {},
-      // 表单校验
-      rules: {
-      }
+      categoryList:[]
     };
   },
   created() {
@@ -236,6 +192,12 @@ export default {
     this.getCategoryList();
   },
   methods: {
+    // 分类列表
+    getCategoryList() {
+      listCategory().then(res => {
+        this.categoryList = res.rows
+      })
+    },
     /** 查询文章列表 */
     getList() {
       this.loading = true;
@@ -244,17 +206,6 @@ export default {
         this.total = response.total;
         this.loading = false;
       });
-    },
-    // 分类列表
-    getCategoryList(){
-      listCategory().then(res => {
-        this.categoryList = res.rows
-      })
-    },
-    // 取消按钮
-    cancel() {
-      this.open = false;
-      this.reset();
     },
     // 表单重置
     reset() {
@@ -301,26 +252,6 @@ export default {
         this.form = response.data;
         this.open = true;
         this.title = "修改文章";
-      });
-    },
-    /** 提交按钮 */
-    submitForm() {
-      this.$refs["form"].validate(valid => {
-        if (valid) {
-          if (this.form.id != null) {
-            updateContent(this.form).then(response => {
-              this.msgSuccess("修改成功");
-              this.open = false;
-              this.getList();
-            });
-          } else {
-            addContent(this.form).then(response => {
-              this.msgSuccess("新增成功");
-              this.open = false;
-              this.getList();
-            });
-          }
-        }
       });
     },
     /** 删除按钮操作 */
