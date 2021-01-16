@@ -1,5 +1,7 @@
 <template>
+  <div>
     <div class="editor" ref="editor" :style="styles"></div>
+  </div>
 </template>
 
 <script>

@@ -4,24 +4,7 @@
       <el-form-item label="文章标题" prop="title">
         <el-input v-model="form.title" placeholder="请输入文章标题"/>
       </el-form-item>
-      <el-form-item label="添加时间" prop="addTime">
-        <el-date-picker
-          clearable size="small"
-          v-model="form.addTime"
-          type="date"
-          value-format="yyyy-MM-dd"
-          placeholder="选择添加时间"
-        />
-      </el-form-item>
-      <el-form-item label="阅读量" prop="views">
-        <el-input v-model="form.views" placeholder="请输入阅读量"/>
-      </el-form-item>
-      <el-form-item label="文章简介" prop="description">
-        <el-input v-model="form.description" placeholder="请输入文章简介"/>
-      </el-form-item>
-      <el-form-item label="文章内容">
-        <editor v-model="form.content" :min-height="192"/>
-      </el-form-item>
+
       <el-form-item label="分类" prop="categoryId">
         <el-select
           v-model="form.categoryId"
@@ -38,7 +21,39 @@
           />
         </el-select>
       </el-form-item>
+
+      <el-form-item label="添加时间" prop="addTime">
+        <el-date-picker
+          clearable size="small"
+          v-model="form.addTime"
+          type="date"
+          value-format="yyyy-MM-dd"
+          placeholder="选择添加时间"
+        />
+      </el-form-item>
+
+      <el-form-item label="阅读量" prop="views">
+        <el-input v-model="form.views" placeholder="请输入阅读量"/>
+      </el-form-item>
+
+      <el-form-item label="文章简介" prop="description">
+        <el-input v-model="form.description" placeholder="请输入文章简介"/>
+      </el-form-item>
+
+      <el-form-item label="编辑器">
+        <el-radio-group v-model="form.editorType">
+          <el-radio :label="1">markdown编辑器</el-radio>
+          <el-radio :label="2">富文本编辑器</el-radio>
+        </el-radio-group>
+      </el-form-item>
+      <el-form-item label="文章内容"  v-if="form.editorType===1">
+        <mavon-editor v-model="form.content" style="height: 100%;"/>
+      </el-form-item>
+      <el-form-item label="文章内容" v-else>
+        <editor v-model="form.content" :min-height="192"/>
+      </el-form-item>
     </el-form>
+
     <div slot="footer" class="dialog-footer">
       <el-button type="primary" @click="submitForm">确 定</el-button>
       <el-button @click="cancel">取 消</el-button>
@@ -49,12 +64,15 @@
 <script>
   import modelMixins from '@/mixins/modelMixins'
   import Editor from '@/components/Editor'
+  import { mavonEditor } from 'mavon-editor'
+  import 'mavon-editor/dist/css/index.css'
   import { addContent, updateContent } from '@/api/blog/content'
 
   export default {
     name: 'index',
     components: {
-      Editor
+      Editor,
+      mavonEditor
     },
     mixins: [modelMixins],
     props: {
@@ -72,7 +90,7 @@
     data() {
       return {
         // 表单参数
-        form: this.editFrom || {},
+        form: { ...this.editFrom, editorType: 1 } || {},
         // 表单校验
         rules: {}
       }
