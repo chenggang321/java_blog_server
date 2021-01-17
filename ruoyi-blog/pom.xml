@@ -16,6 +16,11 @@
     </description>
 
     <dependencies>
+        <!-- 核心模块-->
+        <dependency>
+            <groupId>com.ruoyi</groupId>
+            <artifactId>ruoyi-framework</artifactId>
+        </dependency>
 
         <!-- 通用工具-->
         <dependency>

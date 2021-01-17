@@ -2,6 +2,7 @@ package com.ruoyi.blog.domain;
 
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.ruoyi.common.core.domain.entity.SysUser;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
@@ -49,6 +50,14 @@ public class BlogContent extends BaseEntity
     @Excel(name = "分类关联表id")
     private Long categoryId;
 
+    public SysUser getUser() {
+        return user;
+    }
+
+    public void setUser(SysUser user) {
+        this.user = user;
+    }
+
     private BlogCategory category;
 
     public BlogCategory getCategory() {
@@ -62,6 +71,8 @@ public class BlogContent extends BaseEntity
     /** 用户关联表id */
     @Excel(name = "用户关联表id")
     private Long userId;
+
+    private SysUser user;
 
     public void setId(Long id)
     {

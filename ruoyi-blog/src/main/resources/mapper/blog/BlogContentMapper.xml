@@ -15,6 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="categoryId"    column="category_id"    />
         <result property="userId"    column="user_id"    />
         <association property="category"    column="category_id" javaType="BlogCategory" resultMap="BlogCategoryResult" />
+        <association property="user"    column="user_id" javaType="SysUser" resultMap="SysUserResult" />
     </resultMap>
 
     <resultMap type="BlogCategory" id="BlogCategoryResult">
@@ -22,6 +23,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="name"    column="name"    />
     </resultMap>
 
+    <resultMap type="SysUser" id="SysUserResult">
+        <id     property="userId"       column="user_id"      />
+        <result property="userName"     column="user_name"    />
+    </resultMap>
 
     <sql id="selectBlogContentVo">
         select id, title, add_time, views, description, content, comment_id, category_id, user_id
@@ -29,9 +34,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>
 
     <select id="selectBlogContentList" parameterType="BlogContent" resultMap="BlogContentResult">
-        select c.id,title,add_time,views,description,content,comment_id,category_id,user_id,ca.name
+        select c.id,title,add_time,views,description,content,comment_id,category_id,c.user_id,ca.name,u.user_name
         from blog_content c
         left join blog_category ca on c.category_id=ca.id
+        left join sys_user u on c.user_id=u.user_id
         <where>
             <if test="title != null  and title != ''"> and title = #{title}</if>
             <if test="addTime != null "> and add_time = #{addTime}</if>

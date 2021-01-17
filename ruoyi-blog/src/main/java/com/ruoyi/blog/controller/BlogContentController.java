@@ -2,6 +2,10 @@ package com.ruoyi.blog.controller;
 
 import java.util.List;
 
+import com.ruoyi.common.core.domain.entity.SysUser;
+import com.ruoyi.common.core.domain.model.LoginUser;
+import com.ruoyi.common.utils.ServletUtils;
+import com.ruoyi.framework.web.service.TokenService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -36,6 +40,9 @@ public class BlogContentController extends BaseController
 {
     @Autowired
     private IBlogContentService blogContentService;
+
+    @Autowired
+    private TokenService tokenService;
 
     /**
      * 查询文章列表
@@ -84,6 +91,9 @@ public class BlogContentController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody BlogContent blogContent)
     {
+        LoginUser loginUser = tokenService.getLoginUser(ServletUtils.getRequest());
+        SysUser user = loginUser.getUser();
+        blogContent.setUserId(user.getUserId());
         return toAjax(blogContentService.insertBlogContent(blogContent));
     }
 
