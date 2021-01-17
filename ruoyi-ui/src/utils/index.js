@@ -5,12 +5,12 @@ import { parseTime } from './ruoyi'
  */
 export function formatDate(cellValue) {
   if (cellValue == null || cellValue == "") return "";
-  var date = new Date(cellValue) 
+  var date = new Date(cellValue)
   var year = date.getFullYear()
   var month = date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1
-  var day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate() 
-  var hours = date.getHours() < 10 ? '0' + date.getHours() : date.getHours() 
-  var minutes = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes() 
+  var day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate()
+  var hours = date.getHours() < 10 ? '0' + date.getHours() : date.getHours()
+  var minutes = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()
   var seconds = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds()
   return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds
 }
@@ -330,7 +330,7 @@ export function makeMap(str, expectsLowerCase) {
     ? val => map[val.toLowerCase()]
     : val => map[val]
 }
- 
+
 export const exportDefault = 'export default '
 
 export const beautifierConf = {
@@ -387,4 +387,30 @@ export function camelCase(str) {
 export function isNumberStr(str) {
   return /^[+-]?(0|([1-9]\d*))(\.\d+)?$/g.test(str)
 }
- 
+
+export function loadScript (url) {
+  // 如果是数组
+  const promiseList = []
+  url.forEach((item) => {
+    const p = new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.type = 'text/javascript'
+      script.src = item
+      script.onload = () => {
+        script.onload = null
+        script.onerror = null
+        resolve()
+      }
+      script.onerror = () => {
+        script.onload = null
+        script.onerror = null
+        reject()
+      }
+      const head = document.getElementsByTagName('head')[0];
+      (head || document.body).appendChild(script)
+    })
+    promiseList.push(p)
+  })
+  return Promise.all(promiseList)
+}
+
