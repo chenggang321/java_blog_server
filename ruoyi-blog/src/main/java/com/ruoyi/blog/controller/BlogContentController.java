@@ -68,7 +68,7 @@ public class BlogContentController extends BaseController
      * 获取文章详细信息
      */
     @ApiOperation("获取文章详细信息")
-    @PreAuthorize("@ss.hasPermi('blog:content:query')")
+    // @PreAuthorize("@ss.hasPermi('blog:content:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
