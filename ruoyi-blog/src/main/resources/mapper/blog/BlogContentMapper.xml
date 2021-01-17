@@ -29,15 +29,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectBlogContentVo">
-        select id, title, add_time, views, description, content, comment_id, category_id, user_id
-        from blog_content
-    </sql>
-
-    <select id="selectBlogContentList" parameterType="BlogContent" resultMap="BlogContentResult">
         select c.id,title,add_time,views,description,content,comment_id,category_id,c.user_id,ca.name,u.user_name
         from blog_content c
         left join blog_category ca on c.category_id=ca.id
         left join sys_user u on c.user_id=u.user_id
+    </sql>
+
+    <select id="selectBlogContentList" parameterType="BlogContent" resultMap="BlogContentResult">
+        <include refid="selectBlogContentVo"/>
         <where>
             <if test="title != null  and title != ''"> and title = #{title}</if>
             <if test="addTime != null "> and add_time = #{addTime}</if>
@@ -52,7 +51,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectBlogContentById" parameterType="Long" resultMap="BlogContentResult">
         <include refid="selectBlogContentVo"/>
-        where id = #{id}
+        where c.id = #{id}
     </select>
 
     <insert id="insertBlogContent" parameterType="BlogContent" useGeneratedKeys="true" keyProperty="id">
