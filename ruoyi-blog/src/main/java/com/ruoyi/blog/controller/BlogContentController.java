@@ -106,6 +106,9 @@ public class BlogContentController extends BaseController
     @PutMapping
     public AjaxResult edit(@RequestBody BlogContent blogContent)
     {
+        LoginUser loginUser = tokenService.getLoginUser(ServletUtils.getRequest());
+        SysUser user = loginUser.getUser();
+        blogContent.setUserId(user.getUserId());
         return toAjax(blogContentService.updateBlogContent(blogContent));
     }
 
