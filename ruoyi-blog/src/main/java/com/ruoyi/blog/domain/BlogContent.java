@@ -1,12 +1,13 @@
 package com.ruoyi.blog.domain;
 
-import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.ruoyi.common.core.domain.entity.SysUser;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
+import com.ruoyi.common.core.domain.entity.SysUser;
+
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 
 /**
  * 【请填写功能名称】对象 blog_content
@@ -44,11 +45,28 @@ public class BlogContent extends BaseEntity
 
     /** 评论关联表id */
     @Excel(name = "评论关联表id")
-    private Long commentId;
+    private Long[] commentIds;
+
+    private List<BlogComment> comments;
 
     /** 分类关联表id */
     @Excel(name = "分类关联表id")
     private Long categoryId;
+
+
+    public List<BlogComment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<BlogComment> comments) {
+        this.comments = comments;
+    }
+
+    /** 用户关联表id */
+    @Excel(name = "用户关联表id")
+    private Long userId;
+
+    private SysUser user;
 
     public SysUser getUser() {
         return user;
@@ -67,12 +85,6 @@ public class BlogContent extends BaseEntity
     public void setCategory(BlogCategory category) {
         this.category = category;
     }
-
-    /** 用户关联表id */
-    @Excel(name = "用户关联表id")
-    private Long userId;
-
-    private SysUser user;
 
     public void setId(Long id)
     {
@@ -128,15 +140,7 @@ public class BlogContent extends BaseEntity
     {
         return content;
     }
-    public void setCommentId(Long commentId)
-    {
-        this.commentId = commentId;
-    }
 
-    public Long getCommentId()
-    {
-        return commentId;
-    }
     public void setCategoryId(Long categoryId)
     {
         this.categoryId = categoryId;
@@ -156,18 +160,29 @@ public class BlogContent extends BaseEntity
         return userId;
     }
 
+    public Long[] getCommentIds() {
+        return commentIds;
+    }
+
+    public void setCommentIds(Long[] commentIds) {
+        this.commentIds = commentIds;
+    }
+
     @Override
     public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("id", getId())
-            .append("title", getTitle())
-            .append("addTime", getAddTime())
-            .append("views", getViews())
-            .append("description", getDescription())
-            .append("content", getContent())
-            .append("commentId", getCommentId())
-            .append("categoryId", getCategoryId())
-            .append("userId", getUserId())
-            .toString();
+        return "BlogContent{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", addTime=" + addTime +
+                ", views=" + views +
+                ", description='" + description + '\'' +
+                ", content='" + content + '\'' +
+                ", commentIds=" + Arrays.toString(commentIds) +
+                ", comments=" + comments +
+                ", categoryId=" + categoryId +
+                ", category=" + category +
+                ", userId=" + userId +
+                ", user=" + user +
+                '}';
     }
 }

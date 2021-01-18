@@ -11,11 +11,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="views"    column="views"    />
         <result property="description"    column="description"    />
         <result property="content"    column="content"    />
-        <result property="commentId"    column="comment_id"    />
         <result property="categoryId"    column="category_id"    />
         <result property="userId"    column="user_id"    />
         <association property="category"    column="category_id" javaType="BlogCategory" resultMap="BlogCategoryResult" />
         <association property="user"    column="user_id" javaType="SysUser" resultMap="SysUserResult" />
+        <collection  property="comments"   javaType="java.util.List"        resultMap="BlogCommentResult" />
     </resultMap>
 
     <resultMap type="BlogCategory" id="BlogCategoryResult">
@@ -28,11 +28,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="userName"     column="user_name"    />
     </resultMap>
 
+    <resultMap type="BlogComment" id="BlogCommentResult">
+        <result property="comment"    column="comment"    />
+    </resultMap>
+
+
     <sql id="selectBlogContentVo">
-        select c.id,title,add_time,views,description,content,comment_id,category_id,c.user_id,ca.name,u.user_name
+        select c.id,title,add_time,views,description,content,category_id,c.user_id,ca.name,u.user_name,co.comment
         from blog_content c
         left join blog_category ca on c.category_id=ca.id
         left join sys_user u on c.user_id=u.user_id
+        left join blog_content_comment cc on c.id = cc.content_id
+	    left join blog_comment co on co.id = cc.comment_id
     </sql>
 
     <select id="selectBlogContentList" parameterType="BlogContent" resultMap="BlogContentResult">
@@ -43,7 +50,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="views != null "> and views = #{views}</if>
             <if test="description != null  and description != ''"> and description = #{description}</if>
             <if test="content != null  and content != ''"> and content = #{content}</if>
-            <if test="commentId != null "> and comment_id = #{commentId}</if>
             <if test="categoryId != null "> and category_id = #{categoryId}</if>
             <if test="userId != null "> and user_id = #{userId}</if>
         </where>
@@ -62,7 +68,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="views != null">views,</if>
             <if test="description != null">description,</if>
             <if test="content != null">content,</if>
-            <if test="commentId != null">comment_id,</if>
             <if test="categoryId != null">category_id,</if>
             <if test="userId != null">user_id,</if>
          </trim>
@@ -72,7 +77,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="views != null">#{views},</if>
             <if test="description != null">#{description},</if>
             <if test="content != null">#{content},</if>
-            <if test="commentId != null">#{commentId},</if>
             <if test="categoryId != null">#{categoryId},</if>
             <if test="userId != null">#{userId},</if>
          </trim>
@@ -86,7 +90,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="views != null">views = #{views},</if>
             <if test="description != null">description = #{description},</if>
             <if test="content != null">content = #{content},</if>
-            <if test="commentId != null">comment_id = #{commentId},</if>
             <if test="categoryId != null">category_id = #{categoryId},</if>
             <if test="userId != null">user_id = #{userId},</if>
         </trim>
