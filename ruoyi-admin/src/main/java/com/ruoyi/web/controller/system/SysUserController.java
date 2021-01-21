@@ -140,8 +140,8 @@ public class SysUserController extends BaseController
         {
             return AjaxResult.error("新增用户'" + user.getUserName() + "'失败，邮箱账号已存在");
         }
-        String password = SecurityUtils.encryptPassword(user.getPassword());
-        user.setPassword(password);
+        String password = user.getPassword();
+        user.setPassword(SecurityUtils.encryptPassword(password));
 
         userService.insertUser(user.toSysUser(user));
         String token = loginService.createTokenByAccount(user.getUserName(),password);
