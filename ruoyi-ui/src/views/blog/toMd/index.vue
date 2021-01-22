@@ -37,6 +37,9 @@
       handleClick() {
         const self = this;
         loadScript(['/reMarked.js']).then(()=>{
+          // 移除sf多余div
+          self.code = self.code.replace(/<div\s+class="widget-codetool"[^>]*>([\s\S]+?)<\/div>/g,'')
+          // 移除div标签
           self.content = new reMarked().render(self.code);
         })
       },

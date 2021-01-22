@@ -44,13 +44,23 @@
         <el-radio-group v-model="form.editorType">
           <el-radio :label="1">markdown编辑器</el-radio>
           <el-radio :label="2">富文本编辑器</el-radio>
+          <el-radio :label="3">html输入框</el-radio>
         </el-radio-group>
       </el-form-item>
       <el-form-item label="文章内容"  v-if="form.editorType===1">
-        <mavon-editor v-model="form.content" style="height: 100%;"/>
+        <mavon-editor ref="mavonEditor" v-model="contentMd" style="height: 100%;"/>
       </el-form-item>
-      <el-form-item label="文章内容" v-else>
+      <el-form-item label="文章内容" v-if="form.editorType===2">
         <editor v-model="form.content" :min-height="192"/>
+      </el-form-item>
+      <el-form-item label="文章内容" v-if="form.editorType===3">
+        <el-input
+          type="textarea"
+          id="code"
+          v-model="form.content"
+          rows="10"
+          placeholder="请输入html"
+        />
       </el-form-item>
     </el-form>
 
@@ -67,6 +77,7 @@
   import { mavonEditor } from 'mavon-editor'
   import 'mavon-editor/dist/css/index.css'
   import { addContent, updateContent } from '@/api/blog/content'
+  import {loadScript} from "@/utils";
 
   export default {
     name: 'index',
@@ -87,12 +98,23 @@
         default: () => []
       }
     },
+    mounted() {
+      const self = this;
+      if(this.editFrom.content){
+        this.$nextTick(()=>{
+          loadScript(['/reMarked.js']).then(()=>{
+            self.contentMd = new reMarked().render(self.editFrom.content);
+          })
+        })
+      }
+    },
     data() {
       return {
         // 表单参数
         form: { ...this.editFrom, editorType: 1 } || {},
         // 表单校验
-        rules: {}
+        rules: {},
+        contentMd:''
       }
     },
     methods: {
@@ -100,18 +122,30 @@
       submitForm() {
         this.$refs['form'].validate(valid => {
           if (valid) {
+            if(this.form.editorType === 1) {
+              this.form.content = this.$refs.mavonEditor.d_render
+            }
+            if(this.form.editorType === 3){
+              this.form.content = this.form.content.replace(/<div\s+class="widget-codetool"[^>]*>([\s\S]+?)<\/div>/g,'')
+            }
             if (this.form.id != null) {
               updateContent(this.form).then(response => {
-                this.msgSuccess('修改成功')
+                if(response.code===200){
+                  this.msgSuccess('修改成功')
+                  this.$emit('submitForm')
+                  this.modelVal = false
+                }
               })
             } else {
               addContent(this.form).then(response => {
-                this.msgSuccess('新增成功')
+                if(response.code===200){
+                  this.msgSuccess('新增成功')
+                  this.$emit('submitForm')
+                  this.modelVal = false
+                }
               })
             }
           }
-          this.modelVal = false
-          this.$emit('submitForm')
         })
       },
       cancel() {
