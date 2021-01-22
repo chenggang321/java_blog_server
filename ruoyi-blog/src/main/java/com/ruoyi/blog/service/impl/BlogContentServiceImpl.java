@@ -8,7 +8,7 @@ import com.ruoyi.blog.domain.BlogContent;
 import com.ruoyi.blog.service.IBlogContentService;
 
 /**
- * 【请填写功能名称】Service业务层处理
+ * 文章Service业务层处理
  * 
  * @author chenggang
  * @date 2021-01-14
@@ -20,10 +20,10 @@ public class BlogContentServiceImpl implements IBlogContentService
     private BlogContentMapper blogContentMapper;
 
     /**
-     * 查询【请填写功能名称】
+     * 查询文章
      * 
-     * @param id 【请填写功能名称】ID
-     * @return 【请填写功能名称】
+     * @param id 文章ID
+     * @return 文章
      */
     @Override
     public BlogContent selectBlogContentById(Long id)
@@ -32,10 +32,10 @@ public class BlogContentServiceImpl implements IBlogContentService
     }
 
     /**
-     * 查询【请填写功能名称】列表
+     * 查询文章列表
      * 
-     * @param blogContent 【请填写功能名称】
-     * @return 【请填写功能名称】
+     * @param blogContent 文章
+     * @return 文章
      */
     @Override
     public List<BlogContent> selectBlogContentList(BlogContent blogContent)
@@ -44,9 +44,9 @@ public class BlogContentServiceImpl implements IBlogContentService
     }
 
     /**
-     * 新增【请填写功能名称】
+     * 新增文章
      * 
-     * @param blogContent 【请填写功能名称】
+     * @param blogContent 文章
      * @return 结果
      */
     @Override
@@ -56,9 +56,9 @@ public class BlogContentServiceImpl implements IBlogContentService
     }
 
     /**
-     * 修改【请填写功能名称】
+     * 修改文章
      * 
-     * @param blogContent 【请填写功能名称】
+     * @param blogContent 文章
      * @return 结果
      */
     @Override
@@ -68,9 +68,9 @@ public class BlogContentServiceImpl implements IBlogContentService
     }
 
     /**
-     * 批量删除【请填写功能名称】
+     * 批量删除文章
      * 
-     * @param ids 需要删除的【请填写功能名称】ID
+     * @param ids 需要删除的文章ID
      * @return 结果
      */
     @Override
@@ -80,9 +80,9 @@ public class BlogContentServiceImpl implements IBlogContentService
     }
 
     /**
-     * 删除【请填写功能名称】信息
+     * 删除文章信息
      * 
-     * @param id 【请填写功能名称】ID
+     * @param id 文章ID
      * @return 结果
      */
     @Override

@@ -13,6 +13,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select id, comment from blog_comment
     </sql>
 
+    <select id="selectBlogCommentByComment" parameterType="BlogComment" resultMap="BlogCommentResult">
+        <include refid="selectBlogCommentVo"/>
+        where comment = #{comment}
+    </select>
+
     <select id="selectBlogCommentList" parameterType="BlogComment" resultMap="BlogCommentResult">
         <include refid="selectBlogCommentVo"/>
         <where>

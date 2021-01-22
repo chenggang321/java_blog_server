@@ -8,7 +8,7 @@ import com.ruoyi.blog.domain.BlogCategory;
 import com.ruoyi.blog.service.IBlogCategoryService;
 
 /**
- * 【请填写功能名称】Service业务层处理
+ * 分类Service业务层处理
  * 
  * @author chenggang
  * @date 2021-01-14
@@ -20,10 +20,10 @@ public class BlogCategoryServiceImpl implements IBlogCategoryService
     private BlogCategoryMapper blogCategoryMapper;
 
     /**
-     * 查询【请填写功能名称】
+     * 查询分类
      * 
-     * @param id 【请填写功能名称】ID
-     * @return 【请填写功能名称】
+     * @param id 分类ID
+     * @return 分类
      */
     @Override
     public BlogCategory selectBlogCategoryById(Long id)
@@ -32,10 +32,10 @@ public class BlogCategoryServiceImpl implements IBlogCategoryService
     }
 
     /**
-     * 查询【请填写功能名称】列表
+     * 查询分类列表
      * 
-     * @param blogCategory 【请填写功能名称】
-     * @return 【请填写功能名称】
+     * @param blogCategory 分类
+     * @return 分类
      */
     @Override
     public List<BlogCategory> selectBlogCategoryList(BlogCategory blogCategory)
@@ -44,9 +44,9 @@ public class BlogCategoryServiceImpl implements IBlogCategoryService
     }
 
     /**
-     * 新增【请填写功能名称】
+     * 新增分类
      * 
-     * @param blogCategory 【请填写功能名称】
+     * @param blogCategory 分类
      * @return 结果
      */
     @Override
@@ -56,9 +56,9 @@ public class BlogCategoryServiceImpl implements IBlogCategoryService
     }
 
     /**
-     * 修改【请填写功能名称】
+     * 修改分类
      * 
-     * @param blogCategory 【请填写功能名称】
+     * @param blogCategory 分类
      * @return 结果
      */
     @Override
@@ -68,9 +68,9 @@ public class BlogCategoryServiceImpl implements IBlogCategoryService
     }
 
     /**
-     * 批量删除【请填写功能名称】
+     * 批量删除分类
      * 
-     * @param ids 需要删除的【请填写功能名称】ID
+     * @param ids 需要删除的分类ID
      * @return 结果
      */
     @Override
@@ -80,9 +80,9 @@ public class BlogCategoryServiceImpl implements IBlogCategoryService
     }
 
     /**
-     * 删除【请填写功能名称】信息
+     * 删除分类信息
      * 
-     * @param id 【请填写功能名称】ID
+     * @param id 分类ID
      * @return 结果
      */
     @Override

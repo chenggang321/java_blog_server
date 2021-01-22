@@ -8,7 +8,7 @@ import com.ruoyi.blog.domain.BlogComment;
 import com.ruoyi.blog.service.IBlogCommentService;
 
 /**
- * 【请填写功能名称】Service业务层处理
+ * 评论Service业务层处理
  * 
  * @author chenggang
  * @date 2021-01-18
@@ -19,11 +19,16 @@ public class BlogCommentServiceImpl implements IBlogCommentService
     @Autowired
     private BlogCommentMapper blogCommentMapper;
 
+    @Override
+    public BlogComment selectBlogCommentByComment(String comment) {
+        return blogCommentMapper.selectBlogCommentByComment(comment);
+    }
+
     /**
-     * 查询【请填写功能名称】
+     * 查询评论
      * 
-     * @param id 【请填写功能名称】ID
-     * @return 【请填写功能名称】
+     * @param id 评论ID
+     * @return 评论
      */
     @Override
     public BlogComment selectBlogCommentById(Long id)
@@ -32,10 +37,10 @@ public class BlogCommentServiceImpl implements IBlogCommentService
     }
 
     /**
-     * 查询【请填写功能名称】列表
+     * 查询评论列表
      * 
-     * @param blogComment 【请填写功能名称】
-     * @return 【请填写功能名称】
+     * @param blogComment 评论
+     * @return 评论
      */
     @Override
     public List<BlogComment> selectBlogCommentList(BlogComment blogComment)
@@ -44,9 +49,9 @@ public class BlogCommentServiceImpl implements IBlogCommentService
     }
 
     /**
-     * 新增【请填写功能名称】
+     * 新增评论
      * 
-     * @param blogComment 【请填写功能名称】
+     * @param blogComment 评论
      * @return 结果
      */
     @Override
@@ -56,9 +61,9 @@ public class BlogCommentServiceImpl implements IBlogCommentService
     }
 
     /**
-     * 修改【请填写功能名称】
+     * 修改评论
      * 
-     * @param blogComment 【请填写功能名称】
+     * @param blogComment 评论
      * @return 结果
      */
     @Override
@@ -68,9 +73,9 @@ public class BlogCommentServiceImpl implements IBlogCommentService
     }
 
     /**
-     * 批量删除【请填写功能名称】
+     * 批量删除评论
      * 
-     * @param ids 需要删除的【请填写功能名称】ID
+     * @param ids 需要删除的评论ID
      * @return 结果
      */
     @Override
@@ -80,9 +85,9 @@ public class BlogCommentServiceImpl implements IBlogCommentService
     }
 
     /**
-     * 删除【请填写功能名称】信息
+     * 删除评论信息
      * 
-     * @param id 【请填写功能名称】ID
+     * @param id 评论ID
      * @return 结果
      */
     @Override

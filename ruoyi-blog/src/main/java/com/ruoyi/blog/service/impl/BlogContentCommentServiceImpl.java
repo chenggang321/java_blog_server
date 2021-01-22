@@ -8,7 +8,7 @@ import com.ruoyi.blog.domain.BlogContentComment;
 import com.ruoyi.blog.service.IBlogContentCommentService;
 
 /**
- * 【请填写功能名称】Service业务层处理
+ * 文章评论Service业务层处理
  * 
  * @author chenggang
  * @date 2021-01-18
@@ -20,10 +20,10 @@ public class BlogContentCommentServiceImpl implements IBlogContentCommentService
     private BlogContentCommentMapper blogContentCommentMapper;
 
     /**
-     * 查询【请填写功能名称】
+     * 查询文章评论
      * 
-     * @param contentId 【请填写功能名称】ID
-     * @return 【请填写功能名称】
+     * @param contentId 文章评论ID
+     * @return 文章评论
      */
     @Override
     public BlogContentComment selectBlogContentCommentById(Long contentId)
@@ -32,10 +32,10 @@ public class BlogContentCommentServiceImpl implements IBlogContentCommentService
     }
 
     /**
-     * 查询【请填写功能名称】列表
+     * 查询文章评论列表
      * 
-     * @param blogContentComment 【请填写功能名称】
-     * @return 【请填写功能名称】
+     * @param blogContentComment 文章评论
+     * @return 文章评论
      */
     @Override
     public List<BlogContentComment> selectBlogContentCommentList(BlogContentComment blogContentComment)
@@ -44,9 +44,9 @@ public class BlogContentCommentServiceImpl implements IBlogContentCommentService
     }
 
     /**
-     * 新增【请填写功能名称】
+     * 新增文章评论
      * 
-     * @param blogContentComment 【请填写功能名称】
+     * @param blogContentComment 文章评论
      * @return 结果
      */
     @Override
@@ -56,9 +56,9 @@ public class BlogContentCommentServiceImpl implements IBlogContentCommentService
     }
 
     /**
-     * 修改【请填写功能名称】
+     * 修改文章评论
      * 
-     * @param blogContentComment 【请填写功能名称】
+     * @param blogContentComment 文章评论
      * @return 结果
      */
     @Override
@@ -68,9 +68,9 @@ public class BlogContentCommentServiceImpl implements IBlogContentCommentService
     }
 
     /**
-     * 批量删除【请填写功能名称】
+     * 批量删除文章评论
      * 
-     * @param contentIds 需要删除的【请填写功能名称】ID
+     * @param contentIds 需要删除的文章评论ID
      * @return 结果
      */
     @Override
@@ -80,9 +80,9 @@ public class BlogContentCommentServiceImpl implements IBlogContentCommentService
     }
 
     /**
-     * 删除【请填写功能名称】信息
+     * 删除文章评论信息
      * 
-     * @param contentId 【请填写功能名称】ID
+     * @param contentId 文章评论ID
      * @return 结果
      */
     @Override

@@ -8,7 +8,7 @@ import com.ruoyi.blog.domain.BlogUser;
 import com.ruoyi.blog.service.IBlogUserService;
 
 /**
- * 【请填写功能名称】Service业务层处理
+ * 用户Service业务层处理
  * 
  * @author chenggang
  * @date 2021-01-14
@@ -20,10 +20,10 @@ public class BlogUserServiceImpl implements IBlogUserService
     private BlogUserMapper blogUserMapper;
 
     /**
-     * 查询【请填写功能名称】
+     * 查询用户
      * 
-     * @param id 【请填写功能名称】ID
-     * @return 【请填写功能名称】
+     * @param id 用户ID
+     * @return 用户
      */
     @Override
     public BlogUser selectBlogUserById(Long id)
@@ -32,10 +32,10 @@ public class BlogUserServiceImpl implements IBlogUserService
     }
 
     /**
-     * 查询【请填写功能名称】列表
+     * 查询用户列表
      * 
-     * @param blogUser 【请填写功能名称】
-     * @return 【请填写功能名称】
+     * @param blogUser 用户
+     * @return 用户
      */
     @Override
     public List<BlogUser> selectBlogUserList(BlogUser blogUser)
@@ -44,9 +44,9 @@ public class BlogUserServiceImpl implements IBlogUserService
     }
 
     /**
-     * 新增【请填写功能名称】
+     * 新增用户
      * 
-     * @param blogUser 【请填写功能名称】
+     * @param blogUser 用户
      * @return 结果
      */
     @Override
@@ -56,9 +56,9 @@ public class BlogUserServiceImpl implements IBlogUserService
     }
 
     /**
-     * 修改【请填写功能名称】
+     * 修改用户
      * 
-     * @param blogUser 【请填写功能名称】
+     * @param blogUser 用户
      * @return 结果
      */
     @Override
@@ -68,9 +68,9 @@ public class BlogUserServiceImpl implements IBlogUserService
     }
 
     /**
-     * 批量删除【请填写功能名称】
+     * 批量删除用户
      * 
-     * @param ids 需要删除的【请填写功能名称】ID
+     * @param ids 需要删除的用户ID
      * @return 结果
      */
     @Override
@@ -80,9 +80,9 @@ public class BlogUserServiceImpl implements IBlogUserService
     }
 
     /**
-     * 删除【请填写功能名称】信息
+     * 删除用户信息
      * 
-     * @param id 【请填写功能名称】ID
+     * @param id 用户ID
      * @return 结果
      */
     @Override

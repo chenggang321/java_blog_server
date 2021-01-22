@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * 【请填写功能名称】对象 blog_content
+ * 文章对象 blog_content
  *
  * @author chenggang
  * @date 2021-01-14
