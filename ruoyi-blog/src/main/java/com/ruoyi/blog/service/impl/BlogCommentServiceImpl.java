@@ -48,6 +48,11 @@ public class BlogCommentServiceImpl implements IBlogCommentService
         return blogCommentMapper.selectBlogCommentList(blogComment);
     }
 
+    @Override
+    public List<BlogComment> selectBlogCommentByContentId(Long contentId) {
+        return blogCommentMapper.selectBlogCommentByContentId(contentId);
+    }
+
     /**
      * 新增评论
      * 

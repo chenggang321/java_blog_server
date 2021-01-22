@@ -79,6 +79,17 @@ public class BlogCommentController extends BaseController
     }
 
     /**
+     * 通过文章Id查询评论列表
+     */
+    @GetMapping("/listByContentId")
+    public TableDataInfo listByContentId(BlogComment blogComment)
+    {
+        startPage();
+        List<BlogComment> list = blogCommentService.selectBlogCommentByContentId(blogComment.getContentId());
+        return getDataTable(list);
+    }
+
+    /**
      * 导出评论列表
      */
     @PreAuthorize("@ss.hasPermi('blog:comment:export')")
@@ -104,11 +115,16 @@ public class BlogCommentController extends BaseController
     /**
      * 新增评论
      */
-    @PreAuthorize("@ss.hasPermi('blog:comment:add')")
     @Log(title = "评论", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody BlogComment blogComment)
     {
+        LoginUser loginUser = tokenService.getLoginUser(ServletUtils.getRequest());
+        SysUser user = loginUser.getUser();
+        blogComment.setUserId(user.getUserId());
+        blogComment.setCreateBy(user.getNickName());
+        blogComment.setCreateTime(new Date());
+
         return toAjax(blogCommentService.insertBlogComment(blogComment));
     }
 

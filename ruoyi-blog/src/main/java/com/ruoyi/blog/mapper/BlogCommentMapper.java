@@ -36,6 +36,13 @@ public interface BlogCommentMapper
     public List<BlogComment> selectBlogCommentList(BlogComment blogComment);
 
     /**
+     * 通过文章Id查询评论列表
+     * @param contentId
+     * @return
+     */
+    public List<BlogComment> selectBlogCommentByContentId(Long contentId);
+
+    /**
      * 新增评论
      * 
      * @param blogComment 评论

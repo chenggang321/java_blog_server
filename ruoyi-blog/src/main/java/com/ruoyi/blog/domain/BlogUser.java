@@ -27,7 +27,7 @@ public class BlogUser extends BaseEntity
     private String password;
 
     /** $column.columnComment */
-    @Excel(name = "密码")
+    @Excel(name = "是否为管理员")
     private Integer isAdmin;
 
     public void setId(Long id) 
