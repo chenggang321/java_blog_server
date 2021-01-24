@@ -43,24 +43,9 @@ public class BlogContent extends BaseEntity
     @Excel(name = "文章内容")
     private String content;
 
-    /** 评论关联表id */
-    @Excel(name = "评论关联表id")
-    private Long[] commentIds;
-
-    private List<BlogComment> comments;
-
     /** 分类关联表id */
     @Excel(name = "分类关联表id")
     private Long categoryId;
-
-
-    public List<BlogComment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<BlogComment> comments) {
-        this.comments = comments;
-    }
 
     /** 用户关联表id */
     @Excel(name = "用户关联表id")
@@ -160,14 +145,6 @@ public class BlogContent extends BaseEntity
         return userId;
     }
 
-    public Long[] getCommentIds() {
-        return commentIds;
-    }
-
-    public void setCommentIds(Long[] commentIds) {
-        this.commentIds = commentIds;
-    }
-
     @Override
     public String toString() {
         return "BlogContent{" +
@@ -177,8 +154,6 @@ public class BlogContent extends BaseEntity
                 ", views=" + views +
                 ", description='" + description + '\'' +
                 ", content='" + content + '\'' +
-                ", commentIds=" + Arrays.toString(commentIds) +
-                ", comments=" + comments +
                 ", categoryId=" + categoryId +
                 ", category=" + category +
                 ", userId=" + userId +
