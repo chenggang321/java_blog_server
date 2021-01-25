@@ -48,6 +48,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="categoryId != null "> and category_id = #{categoryId}</if>
             <if test="userId != null "> and user_id = #{userId}</if>
         </where>
+        order by id desc
     </select>
 
     <select id="selectBlogContentById" parameterType="Long" resultMap="BlogContentResult">

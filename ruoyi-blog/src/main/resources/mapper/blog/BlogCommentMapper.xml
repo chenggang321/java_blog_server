@@ -41,6 +41,7 @@
             <if test="contentId != null "> and content_id = #{contentId}</if>
             <if test="comment != null  and comment != ''"> and comment = #{comment}</if>
         </where>
+        order by id desc
     </select>
 
     <select id="selectBlogCommentById" parameterType="Long" resultMap="BlogCommentResult">
