@@ -79,7 +79,11 @@ public class BlogContentController extends BaseController
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
-        return AjaxResult.success(blogContentService.selectBlogContentById(id));
+        BlogContent blogContent = blogContentService.selectBlogContentById(id);
+        // 获取详情时更新查看数
+        blogContent.setViews(blogContent.getViews()+1);
+        blogContentService.updateBlogContent(blogContent);
+        return AjaxResult.success(blogContent);
     }
 
     /**

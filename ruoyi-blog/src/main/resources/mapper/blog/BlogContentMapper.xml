@@ -40,7 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         left join blog_category ca on c.category_id=ca.id
         left join sys_user u on c.user_id=u.user_id
         <where>
-            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="title != null  and title != ''"> and title like concat('%',#{title},'%')</if>
             <if test="addTime != null "> and add_time = #{addTime}</if>
             <if test="views != null "> and views = #{views}</if>
             <if test="description != null  and description != ''"> and description = #{description}</if>
