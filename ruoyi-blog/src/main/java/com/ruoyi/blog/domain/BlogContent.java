@@ -53,6 +53,16 @@ public class BlogContent extends BaseEntity
 
     private SysUser user;
 
+    private List<BlogComment> comments;
+
+    public List<BlogComment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<BlogComment> comments) {
+        this.comments = comments;
+    }
+
     public SysUser getUser() {
         return user;
     }
@@ -155,9 +165,10 @@ public class BlogContent extends BaseEntity
                 ", description='" + description + '\'' +
                 ", content='" + content + '\'' +
                 ", categoryId=" + categoryId +
-                ", category=" + category +
                 ", userId=" + userId +
                 ", user=" + user +
+                ", comments=" + comments +
+                ", category=" + category +
                 '}';
     }
 }
