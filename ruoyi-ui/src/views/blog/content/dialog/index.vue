@@ -78,6 +78,7 @@
   import 'mavon-editor/dist/css/index.css'
   import { addContent, updateContent } from '@/api/blog/content'
   import {loadScript} from "@/utils";
+  import marked from 'marked'
 
   export default {
     name: 'index',
@@ -123,7 +124,7 @@
         this.$refs['form'].validate(valid => {
           if (valid) {
             if(this.form.editorType === 1) {
-              this.form.content = this.$refs.mavonEditor.d_render
+              this.form.content = marked(this.contentMd)
             }
             if(this.form.editorType === 3){
               this.form.content = this.form.content.replace(/<div\s+class="widget-codetool"[^>]*>([\s\S]+?)<\/div>/g,'')
