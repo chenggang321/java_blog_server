@@ -7,7 +7,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * 分类对象 blog_category
- * 
+ *
  * @author chenggang
  * @date 2021-01-14
  */
@@ -22,30 +22,41 @@ public class BlogCategory extends BaseEntity
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
     private String name;
 
-    public void setId(Long id) 
+    private int sort;
+
+    public void setId(Long id)
     {
         this.id = id;
     }
 
-    public Long getId() 
+    public Long getId()
     {
         return id;
     }
-    public void setName(String name) 
+    public void setName(String name)
     {
         this.name = name;
     }
 
-    public String getName() 
+    public String getName()
     {
         return name;
     }
 
+    public int getSort() {
+        return sort;
+    }
+
+    public void setSort(int sort) {
+        this.sort = sort;
+    }
+
     @Override
     public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("id", getId())
-            .append("name", getName())
-            .toString();
+        return "BlogCategory{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", sort=" + sort +
+                '}';
     }
 }
